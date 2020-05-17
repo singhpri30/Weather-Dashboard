@@ -8,3 +8,27 @@
     display: block;
     margin: 5px;
 }
+#search-cityData{
+    border: 2px solid black;
+    padding: 10px;
+}
+.city{
+    display: inline;
+}
+.current-day{
+    display: inline;  
+}
+.temp, .humidity, .wind,.uv-index{
+    margin: 10px;
+    font-style: italic;
+    font-weight: 20px;
+}
+.green {
+    background-color: green;
+}
+.red{
+    background-color: red;
+}
+.orange{
+    background-color: orange;
+}
