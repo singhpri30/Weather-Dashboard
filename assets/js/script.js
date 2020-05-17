@@ -1,70 +1,86 @@
 
+var searchCityArray = [];
+var APIKey = '5e7733603521cee54360e9a63ebcc0a7';
 
-var searchArray = [];
+getCityFromLocalStorage();
 
-//get the search input element
-//get the value of search element and store it in a variable
-// pass the value of search value in the queryURL
+function getCityFromLocalStorage() {
+    var searchCity = JSON.parse(localStorage.getItem("history"));
+    if (searchCity !== null) {
+        searchCityArray = searchCity;
+    }
+
+    displaySearchCity();
+}
+function displaySearchCity() {
+
+    $("#search-result-data").empty();
+    for (var i = 0; i < searchCityArray.length; i++) {
+        var cityName = searchCityArray[i];
+        console.log(cityName);
+
+        var cityElement = $("<button>");
+        cityElement.addClass("city-btn btn btn-primary btn-lg");
+        cityElement.attr("data-name", cityName);
+        cityElement.text(cityName);
+        $("#search-result-data").prepend(cityElement);
+    }
+
+}
 
 
 
-$("#search-btn").on("click", function () {
+$("#search-btn").on("click", function (event) {
+    event.preventDefault();
+
+    var city = $("#search-input").val();
+
+    if (city === "") {
+        return;
+    }
+    searchCityArray.push(city);
+
+    $("#search-input").val(" ");
 
 
-    getLocalData();
-    var searchEl = $("#search-input").val();
-    console.log(searchEl);
-    var APIKey = '5e7733603521cee54360e9a63ebcc0a7';
-    var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${searchEl},newhampshire,+1&appid=${APIKey}`;
+    displayWeatherInfo(city);
+    saveCityInLocalStorage();
+    displaySearchCity();
+
+});
+
+function displayWeatherInfo(city) {
+    var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${city},newhampshire,+1&appid=${APIKey}`;
     console.log(queryURL);
 
-    // We then created an AJAX call
+    //We then created an AJAX call
     $.ajax({
         url: queryURL,
         method: 'GET',
     }).then(function (response) {
 
         console.log(response);
-
-        // Create CODE HERE to Log the queryURL
-        // Create CODE HERE to log the resulting object
         $(".city").text(response.name);
         $(".wind").text("Wind Speed:" + " " + response.wind.speed);
         $(".humidity").text("Humidity:" + " " + response.main.humidity);
         var Temp = response.main.temp
         var F = (Temp - 273.15) * 1.80 + 32;
         $(".temp").text("Temperature:" + " " + F);
-        // Create CODE HERE to calculate the temperature (converted from Kelvin)
-        // Create CODE HERE to transfer content to HTML
-        // Hint: To convert from Kelvin to Fahrenheit: F = (K - 273.15) * 1.80 + 32
-        // Create CODE HERE to dump the temperature content into HTML
-    });
 
-    saveLocalData();
+    });
+}
+
+function saveCityInLocalStorage() {
+
+    localStorage.setItem("history", JSON.stringify(searchCityArray));
+
+}
+
+$(document).on("click", ".city-btn", function () {
+    var city = $(this).attr("data-name");
+    displayWeatherInfo(city);
 });
 
 
-function getLocalData() {
-    var storedData = localStorage.getItem("history")
-    console.log(storedData);
-    var tableRowElement = $("<tr>");
-    var scoreTd = $("<td>");
-    scoreTd.text(storedData);
-    //scoreTd.textContent = scores[i].score;
-
-    $(tableRowElement).append(scoreTd);
 
 
-    $("#search-result-data").append(tableRowElement);
-
-};
-function saveLocalData() {
-
-
-    var searchEl = $("#search-input").val();
-    searchArray.push(searchEl);
-    console.log(searchArray);
-    localStorage.setItem("history", searchEl);
-
-
-};

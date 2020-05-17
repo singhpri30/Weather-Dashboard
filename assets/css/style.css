@@ -4,3 +4,7 @@
 #search-text{
     margin: 0;
 }
+.city-btn{
+    display: block;
+    margin: 5px;
+}
