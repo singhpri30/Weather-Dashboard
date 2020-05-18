@@ -2,7 +2,7 @@
     justify-content: center;
 }
 #search-result-table{
-    background-color: rgba(183, 0, 255, 0.233);
+    background-color: rgba(51, 7, 68, 0.541);
 }
 #search-text{
     margin: 5px 0px 8px 0px;
@@ -70,16 +70,18 @@
 }
 
 @media screen and (max-width: 980px) {
-/* .forecast-day {
-    background-color: rgb(13, 91, 236);
-    color: whitesmoke;
-    margin: 3px;
-    padding: 2px;
-    }  
-} */
 
-@media screen and (max-width: 768px) {
-    
+}
+
+@media screen and (max-width: 768px) {   
+.forecast-day {
+    margin: 3px;
+    padding: 10px;
+    max-width: 100%;
+    }
+#day-forecast{
+    font-size: 28px;
+    }
 }
 @media screen and (max-width: 640px) {
 #search-text{
@@ -96,5 +98,14 @@
     width: 20%;
     margin-bottom: 4px;
     }
+.forecast-day {
+    margin: 3px;
+    padding: 10px;
+    max-width: 100%;
+    }
+#day-forecast{
+    font-size: 28px;
+    }
 }
+
   

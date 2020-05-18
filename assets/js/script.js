@@ -1,34 +1,31 @@
-var searchCityArray = [];
+var searchCityArray = []; //an empty array to store local storage data
 var APIKey = '5e7733603521cee54360e9a63ebcc0a7';
 
 
 getCityFromLocalStorage();
 
-function getCityFromLocalStorage() {
+function getCityFromLocalStorage() { //this function is pulling data from local storage
     var searchCity = JSON.parse(localStorage.getItem("history"));
-    if (searchCity !== null) {
+    if (searchCity !== null) { //if local data if not null then value of searchCityArray will be searchCity
         searchCityArray = searchCity;
     }
 
-    displaySearchCity();
+    displaySearchCity(); //calling this function to display local data on the HTML page
 }
 function displaySearchCity() {
-
-    $("#search-result-data").empty();
-    for (var i = 0; i < searchCityArray.length; i++) {
+    //$("#search-result-data").empty(); //clear existing values
+    for (var i = 0; i < searchCityArray.length; i++) { //looping over searchCityArray
         var cityName = searchCityArray[i];
-        var cityElement = $("<p>").addClass("card-text city-btn btn btn-lg mb-1");
-        //cityElement.addClass("city-btn btn btn-primary btn-lg");
-        cityElement.attr("data-name", cityName);
-        cityElement.text(cityName);
-        $("#search-result-data").prepend(cityElement);
+        var cityElement = $("<p>").addClass("city-btn btn btn-lg mb-1"); //creating element and adding classes
+        cityElement.attr("data-name", cityName); //adding data attribute
+        cityElement.text(cityName); // element text will be fetched from local storage
+        $("#search-result-data").prepend(cityElement); //element will be prepended on the HTML page
     }
 
 }
 
-$("#search-btn").on("click", function (event) {
-    event.preventDefault();
-
+$("#search-btn").on("click", function () {
+    
     var city = $("#search-input").val();
     if (city === "") {
         return;
@@ -36,14 +33,11 @@ $("#search-btn").on("click", function (event) {
     if (searchCityArray.indexOf(city) === -1) {
 
         searchCityArray.push(city);
+        displaySearchCity();
+        saveCityInLocalStorage();
     }
-
     $("#search-input").val(" ");
-
-
     displayWeatherInfo(city);
-    saveCityInLocalStorage();
-    displaySearchCity();
 
 });
 
@@ -52,7 +46,6 @@ function displayWeatherInfo(city) {
     $("#city-section").removeClass("d-none");
     var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKey}`;
 
-    //We then created an AJAX call
     $.ajax({
         url: queryURL,
         method: 'GET',
@@ -71,20 +64,16 @@ function displayWeatherInfo(city) {
         $(".temp").text("Temperature:" + " " + F + " " + "°F");
         var lat = response.coord.lat;
         var lon = response.coord.lon;
-        uvQueryURL = `https://api.openweathermap.org/data/2.5/uvi/forecast?&appid=${APIKey}&lat=${lat}&lon=${lon}`;
-        console.log(uvQueryURL);
 
-        //This is nested ajax request that gets the UV index but uses longitude and latitude from the previous ajax request to do so.
-
+        //This is nested ajax request that gets the UV index but uses longitude and latitude from the previous ajax request.
+        var uvQueryURL = `https://api.openweathermap.org/data/2.5/uvi/forecast?&appid=${APIKey}&lat=${lat}&lon=${lon}`;
         $.ajax({
             url: uvQueryURL,
             method: "GET"
         }).then(function (response) {
             var uvIndex = response[0].value;
-            console.log(uvIndex);
-
-            $("#uv-value").text("UV Index:" + uvIndex);
-            if (uvIndex >= 9) {
+            $("#uv-value").text("UV Index:" + uvIndex); //displaying the value of UV index
+            if (uvIndex >= 9) {// adding different classes for different UV index
                 $("#uv-value").addClass("red");
             }
             else if (uvIndex > 4) {
@@ -110,13 +99,9 @@ function displayWeatherInfo(city) {
 
                 var dateValue = forecastTimes[i].dt_txt;
                 var dt = moment(dateValue, moment.ISO_8601).format('MM/DD/YYYY'); //changing the date format
-                //var dateEl = $("<p>").text(dt);
-
                 var iconCode = forecastTimes[i].weather[0].icon;
                 var iconURL = "https://openweathermap.org/img/w/" + iconCode + ".png";
-                //var iconImageEl = $("<img>").attr("src", iconURL);
                 var forecastHum = forecastTimes[i].main.humidity;
-                //humidityEl.text("Humidity:" + " " + forecastTimes[i].main.humidity + " " + "%");
                 var Temp = forecastTimes[i].main.temp
                 var F = (Temp - 273.15) * 1.80 + 32;
 
@@ -131,8 +116,6 @@ function displayWeatherInfo(city) {
         }
     });
 };
-
-
 
 function saveCityInLocalStorage() {
     localStorage.setItem("history", JSON.stringify(searchCityArray));
