@@ -17,8 +17,6 @@ function displaySearchCity() {
     $("#search-result-data").empty();
     for (var i = 0; i < searchCityArray.length; i++) {
         var cityName = searchCityArray[i];
-        console.log(cityName);
-
         var cityElement = $("<p>").addClass("card-text city-btn btn btn-lg mb-1");
         //cityElement.addClass("city-btn btn btn-primary btn-lg");
         cityElement.attr("data-name", cityName);
@@ -50,10 +48,9 @@ $("#search-btn").on("click", function (event) {
 });
 
 function displayWeatherInfo(city) {
-    $("#city-section").removeClass("d-none");
 
+    $("#city-section").removeClass("d-none");
     var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKey}`;
-    console.log(queryURL);
 
     //We then created an AJAX call
     $.ajax({
@@ -61,7 +58,6 @@ function displayWeatherInfo(city) {
         method: 'GET',
     }).then(function (response) {
 
-        console.log(response);
         $(".city").text(response.name);
         var iconCode = response.weather[0].icon;
         var iconURL = "https://openweathermap.org/img/w/" + iconCode + ".png";
@@ -125,8 +121,8 @@ function displayWeatherInfo(city) {
                 var F = (Temp - 273.15) * 1.80 + 32;
 
 
-                $(".forecast-list").append("<div class='my-3 pb-3 col-md-2 col-lg-2 forecast-day'>" +
-                    "<h5>" + dt + "<h5>" +
+                $(".forecast-list").append("<div class='my-1 pb-4 col-md-2 forecast-day'>" +
+                    "<h5>" + dt + "</h5>" +
                     "<img class='ficon' src=" + iconURL + " alt='Weather icon'>" +
                     "<div>Temp: " + F.toFixed(1) + " °F" +
                     "</div><div>Humidity: " + forecastHum +

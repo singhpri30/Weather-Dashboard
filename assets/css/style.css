@@ -2,7 +2,7 @@
     justify-content: center;
 }
 #search-result-table{
-    background-color: rgb(36, 118, 241);
+    background-color: rgba(183, 0, 255, 0.233);
 }
 #search-text{
     margin: 5px 0px 8px 0px;
@@ -10,22 +10,27 @@
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 #search-input{
-    width: 60%;
+    width: 55%;
     height: 40px;
     margin-bottom: 4px;
 }
 #search-btn{
-    width: 20%;
+    width: 35%;
     margin-bottom: 4px;
 }
 .city-btn{
     display: block;
     margin: 2px;
-    background-color: rgb(236, 236, 129);
+    background-color: rgba(12, 12, 10, 0.842);
+    color: azure;
+}
+#city-section{
+    background-color: rgba(13, 91, 236, 0.548);
 }
 #search-cityData{
-    border: 2px solid black;
-    padding: 10px;
+    border: 1px solid rgb(241, 236, 236); 
+    padding: 5px;
+    margin-top: 5px;
 }
 .city{
     display: inline;
@@ -36,7 +41,8 @@
 .temp, .humidity, .wind,.uv-index{
     margin: 10px;
     font-style: italic;
-    font-weight: 20px;
+    font-weight: bold;
+
 }
 .green {
     background-color: green;
@@ -47,22 +53,30 @@
 .orange{
     background-color: orange;
 }
-/* .card{
-    display: inline;
-} */
-/* #card-section {
-    background-color: cornflowerblue;
-    color: whitesmoke;
-    margin-left: 3px;
-    padding-top: 10px;
-} */
 .forecast-day {
-    background-color: cornflowerblue;
+    background-color: rgb(13, 91, 236);
     color: whitesmoke;
     margin: 3px;
-    padding-top: 10px;
+    padding: 5px;
+    width: 100%;
+    max-width: 18%;
+}
+.forecast-banner{
+    padding: 0; 
+}
+#day-forecast{
+    margin-top: 5px;
+    padding: 0;
 }
 
+@media screen and (max-width: 980px) {
+/* .forecast-day {
+    background-color: rgb(13, 91, 236);
+    color: whitesmoke;
+    margin: 3px;
+    padding: 2px;
+    }  
+} */
 
 @media screen and (max-width: 768px) {
     
