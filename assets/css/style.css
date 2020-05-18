@@ -1,12 +1,27 @@
 .navbar{
     justify-content: center;
 }
+#search-result-table{
+    background-color: rgb(36, 118, 241);
+}
 #search-text{
-    margin: 0;
+    margin: 5px 0px 8px 0px;
+    font-size: 25px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+#search-input{
+    width: 60%;
+    height: 40px;
+    margin-bottom: 4px;
+}
+#search-btn{
+    width: 20%;
+    margin-bottom: 4px;
 }
 .city-btn{
     display: block;
-    margin: 5px;
+    margin: 2px;
+    background-color: rgb(236, 236, 129);
 }
 #search-cityData{
     border: 2px solid black;
@@ -47,3 +62,25 @@
     margin: 3px;
     padding-top: 10px;
 }
+
+
+@media screen and (max-width: 768px) {
+    
+}
+@media screen and (max-width: 640px) {
+#search-text{
+    text-align: center;
+    } 
+#search-input{
+    margin-left: 120px;
+    width: 40%;
+    height: 40px;
+    margin-bottom: 4px;
+    }
+#search-btn{
+    margin-right: 80px;
+    width: 20%;
+    margin-bottom: 4px;
+    }
+}
+  

@@ -19,7 +19,7 @@ function displaySearchCity() {
         var cityName = searchCityArray[i];
         console.log(cityName);
 
-        var cityElement = $("<p>").addClass("card-text city-btn btn btn-primary btn-lg");
+        var cityElement = $("<p>").addClass("card-text city-btn btn btn-lg mb-1");
         //cityElement.addClass("city-btn btn btn-primary btn-lg");
         cityElement.attr("data-name", cityName);
         cityElement.text(cityName);
@@ -32,9 +32,9 @@ $("#search-btn").on("click", function (event) {
     event.preventDefault();
 
     var city = $("#search-input").val();
-    // if (city === "") {
-    //     return;
-    // }
+    if (city === "") {
+        return;
+    }
     if (searchCityArray.indexOf(city) === -1) {
 
         searchCityArray.push(city);
@@ -64,7 +64,7 @@ function displayWeatherInfo(city) {
         console.log(response);
         $(".city").text(response.name);
         var iconCode = response.weather[0].icon;
-        var iconURL = "http://openweathermap.org/img/w/" + iconCode + ".png";
+        var iconURL = "https://openweathermap.org/img/w/" + iconCode + ".png";
         $(".icon").attr("src", iconURL);
         var currentDay = moment().format("MMMM Do YYYY");
         $(".current-day").text("(" + currentDay + ")");
@@ -75,7 +75,7 @@ function displayWeatherInfo(city) {
         $(".temp").text("Temperature:" + " " + F + " " + "°F");
         var lat = response.coord.lat;
         var lon = response.coord.lon;
-        uvQueryURL = `http://api.openweathermap.org/data/2.5/uvi/forecast?&appid=${APIKey}&lat=${lat}&lon=${lon}`;
+        uvQueryURL = `https://api.openweathermap.org/data/2.5/uvi/forecast?&appid=${APIKey}&lat=${lat}&lon=${lon}`;
         console.log(uvQueryURL);
 
         //This is nested ajax request that gets the UV index but uses longitude and latitude from the previous ajax request to do so.
@@ -101,7 +101,7 @@ function displayWeatherInfo(city) {
     })
 
     //This ajax request collects weather data for the next 5 days (specifically it is grabbing the stays from noon, as opposed to every few hours)
-    var queryURL2 = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${APIKey}`;
+    var queryURL2 = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${APIKey}`;
     $.ajax({
         url: queryURL2,
         method: "GET"
@@ -117,7 +117,7 @@ function displayWeatherInfo(city) {
                 //var dateEl = $("<p>").text(dt);
 
                 var iconCode = forecastTimes[i].weather[0].icon;
-                var iconURL = "http://openweathermap.org/img/w/" + iconCode + ".png";
+                var iconURL = "https://openweathermap.org/img/w/" + iconCode + ".png";
                 //var iconImageEl = $("<img>").attr("src", iconURL);
                 var forecastHum = forecastTimes[i].main.humidity;
                 //humidityEl.text("Humidity:" + " " + forecastTimes[i].main.humidity + " " + "%");
