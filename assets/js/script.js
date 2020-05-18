@@ -76,7 +76,7 @@ function displayWeatherInfo(city) {
             if (uvIndex >= 9) {// adding different classes for different UV index
                 $("#uv-value").addClass("red");
             }
-            else if (uvIndex > 4) {
+            else if (uvIndex >=4) {
                 $("#uv-value").addClass("orange");
             }
             else {
