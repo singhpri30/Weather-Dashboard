@@ -6,8 +6,8 @@ Objective: Developers are often tasked with retrieving data from another applica
 ### This project has the following script features:
 * An event listener on-click that receives user input
 * 3 different API calls
-    * One in for current city forecast
-    * Second id for UV index for current city forecast
+    * First one is for current city forecast
+    * Second is for UV index for current city forecast
     * Third is for the 5-day forecast
 * The dynamically created elements to display current city and 5-day forecast using HTML, Bootstrap CSS framework, and jQuery
 * If/else statement to add the right color to UV index.
@@ -20,7 +20,7 @@ Objective: Developers are often tasked with retrieving data from another applica
 * A row and column grid that provides the current weather Location, Temp, Humidity, Wind Speed, UV Index
 * UV Index is color-coded to indicate whether the conditions are favorable, moderate, or severe
     * Red is when the UV index is greater than or equal to 9
-    * orange is when the UV index is between 4 to 8
+    * Orange is when the UV index is between 4 to 8
     * Green is when the UV index is less than 4
 * A row and column grid that provides a five-day forecast
 * when the page is refreshed the saved search cities will be displayed.
