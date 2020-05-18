@@ -20,7 +20,7 @@
 
     <div class="container-fluid mt-1">
         <div class="row">
-            <div id="search-result-table" class="col-md-4 bg-secondary">
+            <div id="search-result-table" class="col-md-3 bg-secondary">
                 <p></p>
                 <form class="form-inline my-2 my-lg-0" method="POST">
                     <label id="search-text" for="todo-text">Search for a City:</label>
@@ -29,36 +29,50 @@
                     <button id="search-btn" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </form>
 
-                <ul id="search-result-data">
+                <div class="row">
+                    <div id="search-result-data" class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
 
-                </ul>
+                            </div>
+                        </div>
 
-            </div>
-            <div class="col-md-8">
-                <div id="search-cityData" class="conatiner">
-                    <h2 class="city"></h2>
-                    <h3 class="current-day"></h3>
-                    <img class="icon" alt="Weather icon">
-                    <div class="temp"></div>
-                    <div class="humidity"></div>
-                    <div class="wind"></div>
-                    <div class="uv-index"><span id="uv-value"></span></div>
+                    </div>
 
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repudiandae,
-                    impedit
-                    commodi! Repudiandae, nesciunt. Neque tempora voluptates quas blanditiis deserunt, dicta aliquam
-                    explicabo itaque saepe, doloribus fugit nihil sit libero enim.
                 </div>
 
-                <div class="conatiner">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis quia,
-                    molestiae
-                    qui quasi aut quidem aliquid. Voluptas doloribus ab hic neque voluptatibus dolorem a repellat. Eius
-                    voluptatibus aspernatur distinctio aut.
-                </div>
             </div>
 
+            <div id="city-section" class="col-md-9 container d-none">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="search-cityData">
+                            <h2 class="city"></h2>
+                            <h3 class="current-day"></h3>
+                            <img class="icon" alt="Weather icon">
+                            <div class="temp"></div>
+                            <div class="humidity"></div>
+                            <div class="wind"></div>
+                            <div class="uv-index"><span id="uv-value"></span></div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="col-12 forecast-banner">
+                    <h2 class='col-12'>5-Day Forecast:</h2>
+                    <div class="ml-1 card-group forecast-list"></div>
+                </div>
+
+            </div>
 
         </div>
+
+    </div>
+
+
+    </div>
 
     </div>
     </div>

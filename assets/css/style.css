@@ -32,3 +32,18 @@
 .orange{
     background-color: orange;
 }
+/* .card{
+    display: inline;
+} */
+/* #card-section {
+    background-color: cornflowerblue;
+    color: whitesmoke;
+    margin-left: 3px;
+    padding-top: 10px;
+} */
+.forecast-day {
+    background-color: cornflowerblue;
+    color: whitesmoke;
+    margin: 3px;
+    padding-top: 10px;
+}
