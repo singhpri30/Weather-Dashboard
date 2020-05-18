@@ -13,7 +13,7 @@ function getCityFromLocalStorage() { //this function is pulling data from local 
     displaySearchCity(); //calling this function to display local data on the HTML page
 }
 function displaySearchCity() {
-    //$("#search-result-data").empty(); //clear existing values
+    $("#search-result-data").empty(); //clear existing values
     for (var i = 0; i < searchCityArray.length; i++) { //looping over searchCityArray
         var cityName = searchCityArray[i];
         var cityElement = $("<p>").addClass("city-btn btn btn-lg mb-1"); //creating element and adding classes
@@ -25,27 +25,27 @@ function displaySearchCity() {
 }
 
 $("#search-btn").on("click", function () {
-    
-    var city = $("#search-input").val();
-    if (city === "") {
+
+    var city = $("#search-input").val(); //storing value of search city in a variable
+    if (city === "") { //if search input is empty nothing will happen
         return;
     }
-    if (searchCityArray.indexOf(city) === -1) {
+    if (searchCityArray.indexOf(city) === -1) { //this condition will check for the existing values in the array
 
         searchCityArray.push(city);
-        displaySearchCity();
+
         saveCityInLocalStorage();
     }
     $("#search-input").val(" ");
     displayWeatherInfo(city);
-
+    displaySearchCity();
 });
 
 function displayWeatherInfo(city) {
 
     $("#city-section").removeClass("d-none");
-    var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKey}`;
 
+    var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKey}`;
     $.ajax({
         url: queryURL,
         method: 'GET',
@@ -94,9 +94,7 @@ function displayWeatherInfo(city) {
         $(".forecast-list").empty();
         var forecastTimes = response.list;
         for (i = 0; i < forecastTimes.length; i++) {
-
             if (forecastTimes[i].dt_txt[12] === "2") {
-
                 var dateValue = forecastTimes[i].dt_txt;
                 var dt = moment(dateValue, moment.ISO_8601).format('MM/DD/YYYY'); //changing the date format
                 var iconCode = forecastTimes[i].weather[0].icon;
@@ -104,7 +102,6 @@ function displayWeatherInfo(city) {
                 var forecastHum = forecastTimes[i].main.humidity;
                 var Temp = forecastTimes[i].main.temp
                 var F = (Temp - 273.15) * 1.80 + 32;
-
 
                 $(".forecast-list").append("<div class='my-1 pb-4 col-md-2 forecast-day'>" +
                     "<h5>" + dt + "</h5>" +
@@ -117,13 +114,13 @@ function displayWeatherInfo(city) {
     });
 };
 
-function saveCityInLocalStorage() {
+function saveCityInLocalStorage() { //storing values in local storage
     localStorage.setItem("history", JSON.stringify(searchCityArray));
 }
 
-$(document).on("click", ".city-btn", function () {
-    var city = $(this).attr("data-name");
-    displayWeatherInfo(city);
+$(document).on("click", ".city-btn", function () { // this click event will occur when user clicks on searched city button
+    var city = $(this).attr("data-name"); //data attribute value of clicked button will be stored in a variable
+    displayWeatherInfo(city); //value will be passed to this function
 });
 
 
